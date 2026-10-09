@@ -1,0 +1,208 @@
+{
+  "name": "Link in Bio",
+  "slug": "link-in-bio",
+  "version": "1.0.0",
+  "render_version": "v1",
+  "author": "Masthead",
+  "description": "A mobile-first link-in-bio homepage: profile, links, featured work and socials, on a site that can grow into a blog or portfolio.",
+  "tokens": [
+    {
+      "key": "palette",
+      "label": "Palette",
+      "type": "select",
+      "options": [
+        "paper",
+        "ink",
+        "clay",
+        "moss",
+        "ultraviolet",
+        "custom"
+      ],
+      "default": "paper",
+      "category": "Colours",
+      "description": "Each palette has a light and a dark version. 'custom' uses the three colours below in both."
+    },
+    {
+      "key": "appearance",
+      "label": "Appearance",
+      "type": "select",
+      "options": [
+        "auto",
+        "light",
+        "dark"
+      ],
+      "default": "auto",
+      "category": "Colours",
+      "description": "'auto' follows the visitor's system setting."
+    },
+    {
+      "key": "custom_background",
+      "label": "Custom background",
+      "type": "color",
+      "default": "#f6f3ee",
+      "category": "Colours",
+      "description": "Only used with the 'custom' palette."
+    },
+    {
+      "key": "custom_text",
+      "label": "Custom text",
+      "type": "color",
+      "default": "#1b1b1b",
+      "category": "Colours",
+      "description": "Only used with the 'custom' palette."
+    },
+    {
+      "key": "custom_accent",
+      "label": "Custom accent",
+      "type": "color",
+      "default": "#d9480f",
+      "category": "Colours",
+      "description": "Only used with the 'custom' palette. Filled buttons use your background colour for their text, so pick an accent that contrasts with it."
+    },
+    {
+      "key": "background_image",
+      "label": "Background image",
+      "type": "file",
+      "default": "",
+      "category": "Background"
+    },
+    {
+      "key": "background_treatment",
+      "label": "Image treatment",
+      "type": "select",
+      "options": [
+        "none",
+        "dim",
+        "blur"
+      ],
+      "default": "dim",
+      "category": "Background",
+      "description": "Keeps text readable over busy photos."
+    },
+    {
+      "key": "heading_font",
+      "label": "Heading font",
+      "type": "select",
+      "options": [
+        "Inter",
+        "Instrument Sans",
+        "DM Sans",
+        "Manrope",
+        "Space Grotesk",
+        "Fraunces",
+        "Instrument Serif",
+        "Newsreader",
+        "IBM Plex Mono",
+        "System sans",
+        "System serif"
+      ],
+      "default": "Instrument Serif",
+      "category": "Typography",
+      "description": "Your name, section headings and editorial link titles."
+    },
+    {
+      "key": "body_font",
+      "label": "Body font",
+      "type": "select",
+      "options": [
+        "Inter",
+        "Instrument Sans",
+        "DM Sans",
+        "Manrope",
+        "Space Grotesk",
+        "Fraunces",
+        "Instrument Serif",
+        "Newsreader",
+        "IBM Plex Mono",
+        "System sans",
+        "System serif"
+      ],
+      "default": "Inter",
+      "category": "Typography"
+    },
+    {
+      "key": "link_style",
+      "label": "Link style",
+      "type": "select",
+      "options": [
+        "filled",
+        "outline",
+        "soft",
+        "shadow"
+      ],
+      "default": "soft",
+      "category": "Links",
+      "description": "Applies to the classic list, grid and split layouts."
+    },
+    {
+      "key": "link_shape",
+      "label": "Link shape",
+      "type": "select",
+      "options": [
+        "square",
+        "rounded",
+        "pill"
+      ],
+      "default": "rounded",
+      "category": "Links",
+      "description": "Corner shape for link buttons and cards."
+    },
+    {
+      "key": "link_spacing",
+      "label": "Spacing",
+      "type": "select",
+      "options": [
+        "compact",
+        "comfortable",
+        "airy"
+      ],
+      "default": "comfortable",
+      "category": "Links",
+      "description": "Space between links."
+    },
+    {
+      "key": "avatar_shape",
+      "label": "Avatar shape",
+      "type": "select",
+      "options": [
+        "circle",
+        "rounded",
+        "square"
+      ],
+      "default": "circle",
+      "category": "Profile"
+    },
+    {
+      "key": "favicon",
+      "label": "Favicon",
+      "type": "file",
+      "default": "",
+      "category": "Sharing"
+    },
+    {
+      "key": "share_image",
+      "label": "Share image",
+      "type": "file",
+      "default": "",
+      "category": "Sharing",
+      "description": "Shown when your page is shared on social media. Falls back to your avatar."
+    },
+    {
+      "key": "show_branding",
+      "label": "Show \"Published with Masthead\"",
+      "type": "boolean",
+      "default": true,
+      "category": "Footer"
+    }
+  ],
+  "page_options": [],
+  "post_options": [
+    {
+      "key": "featured_image",
+      "label": "Featured image",
+      "type": "file",
+      "default": "",
+      "description": "Shown on the post and as its thumbnail in 'Recent writing'."
+    }
+  ]
+}

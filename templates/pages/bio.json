@@ -1,0 +1,187 @@
+{
+  "label": "Link in Bio",
+  "description": "Your profile, links and social profiles on one page. Set it as the site homepage.",
+  "page_options": [
+    {
+      "key": "layout",
+      "label": "Layout",
+      "type": "select",
+      "options": [
+        "classic list",
+        "grid",
+        "editorial",
+        "split",
+        "gallery",
+        "minimal text"
+      ],
+      "default": "classic list",
+      "description": "Change it any time — your profile and links stay the same."
+    },
+    {
+      "key": "avatar",
+      "label": "Avatar",
+      "type": "file",
+      "default": ""
+    },
+    {
+      "key": "avatar_alt",
+      "label": "Avatar description",
+      "type": "string",
+      "default": "",
+      "description": "Describe the photo for screen readers."
+    },
+    {
+      "key": "name",
+      "label": "Display name",
+      "type": "string",
+      "default": "",
+      "description": "Leave empty to use the site name."
+    },
+    {
+      "key": "bio",
+      "label": "Bio",
+      "type": "text",
+      "default": "",
+      "description": "Leave empty to use the site description."
+    },
+    {
+      "key": "status",
+      "label": "Status",
+      "type": "string",
+      "default": "",
+      "description": "Optional, e.g. 'Booking commissions for spring'."
+    },
+    {
+      "key": "links",
+      "label": "Links",
+      "type": "list",
+      "item_label": "Link",
+      "fields": [
+        {
+          "key": "show",
+          "label": "Visible",
+          "type": "boolean",
+          "default": true
+        },
+        {
+          "key": "kind",
+          "label": "Kind",
+          "type": "select",
+          "options": [
+            "link",
+            "featured",
+            "heading"
+          ],
+          "default": "link",
+          "description": "'featured' renders a large card with image; 'heading' starts a new group."
+        },
+        {
+          "key": "title",
+          "label": "Title",
+          "type": "string",
+          "default": ""
+        },
+        {
+          "key": "description",
+          "label": "Description",
+          "type": "string",
+          "default": ""
+        },
+        {
+          "key": "url",
+          "label": "URL",
+          "type": "url",
+          "default": "",
+          "description": "https://, mailto: and tel: links, or a path on this site like /about."
+        },
+        {
+          "key": "image",
+          "label": "Image",
+          "type": "file",
+          "default": "",
+          "description": "Thumbnail; the cover for 'featured' links and in the gallery layout."
+        }
+      ],
+      "default": []
+    },
+    {
+      "key": "socials",
+      "label": "Social profiles",
+      "type": "list",
+      "item_label": "Profile",
+      "fields": [
+        {
+          "key": "network",
+          "label": "Network",
+          "type": "select",
+          "options": [
+            "instagram",
+            "tiktok",
+            "youtube",
+            "x",
+            "threads",
+            "bluesky",
+            "mastodon",
+            "linkedin",
+            "github",
+            "dribbble",
+            "behance",
+            "twitch",
+            "spotify",
+            "soundcloud",
+            "substack",
+            "email",
+            "website"
+          ],
+          "default": "instagram"
+        },
+        {
+          "key": "url",
+          "label": "URL",
+          "type": "url",
+          "default": ""
+        }
+      ],
+      "default": []
+    },
+    {
+      "key": "socials_position",
+      "label": "Social icons",
+      "type": "select",
+      "options": [
+        "below profile",
+        "bottom of page"
+      ],
+      "default": "below profile"
+    },
+    {
+      "key": "show_recent_posts",
+      "label": "Show recent writing",
+      "type": "boolean",
+      "default": false,
+      "category": "Writing"
+    },
+    {
+      "key": "recent_posts_title",
+      "label": "Section title",
+      "type": "string",
+      "default": "Writing",
+      "category": "Writing"
+    },
+    {
+      "key": "recent_posts_count",
+      "label": "Number of posts",
+      "type": "number",
+      "default": 3,
+      "category": "Writing"
+    },
+    {
+      "key": "show_pages",
+      "label": "List site pages as links",
+      "type": "boolean",
+      "default": false,
+      "category": "Pages",
+      "description": "Adds your other published pages under your links."
+    }
+  ]
+}

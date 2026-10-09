@@ -1,0 +1,80 @@
+{%- assign tk = theme.tokens -%}
+{%- assign o = page.page_options -%}
+{%- assign is_bio = false -%}{%- if page.template == "bio" -%}{%- assign is_bio = true -%}{%- endif -%}
+{%- if is_bio -%}
+  {%- assign doc_title = o.name | default: site.title | default: site.name -%}
+  {%- assign meta_description = o.bio | default: site.description -%}
+  {%- assign share_image = tk.share_image | default: o.avatar -%}
+{%- elsif post -%}
+  {%- capture doc_title %}{{ post.title }} — {{ site.title | default: site.name }}{% endcapture -%}
+  {%- assign meta_description = post.excerpt | default: site.description -%}
+  {%- assign share_image = post.post_options.featured_image | default: tk.share_image -%}
+{%- elsif page -%}
+  {%- capture doc_title %}{{ page.title }} — {{ site.title | default: site.name }}{% endcapture -%}
+  {%- assign meta_description = site.description -%}
+  {%- assign share_image = tk.share_image -%}
+{%- else -%}
+  {%- assign doc_title = site.title | default: site.name -%}
+  {%- assign meta_description = site.description -%}
+  {%- assign share_image = tk.share_image -%}
+{%- endif -%}
+{%- assign meta_description = meta_description | strip_newlines | truncate: 160 -%}
+{%- assign f_heading = tk.heading_font | default: "Instrument Serif" -%}
+{%- assign f_body = tk.body_font | default: "Inter" -%}
+{%- assign serif_fonts = "|Fraunces|Instrument Serif|Newsreader|" -%}
+<!DOCTYPE html>
+<html lang="en" data-palette="{{ tk.palette | default: 'paper' }}" data-appearance="{{ tk.appearance | default: 'auto' }}" data-link-style="{{ tk.link_style | default: 'soft' }}" data-shape="{{ tk.link_shape | default: 'rounded' }}" data-spacing="{{ tk.link_spacing | default: 'comfortable' }}" data-avatar="{{ tk.avatar_shape | default: 'circle' }}"{% if tk.background_image != "" %} data-backdrop="{{ tk.background_treatment | default: 'dim' }}"{% endif %}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ doc_title | escape }}</title>
+    {% if meta_description != "" %}<meta name="description" content="{{ meta_description | escape }}" />{% endif %}
+    <meta property="og:type" content="{% if post %}article{% else %}profile{% endif %}" />
+    <meta property="og:title" content="{{ doc_title | escape }}" />
+    {% if meta_description != "" %}<meta property="og:description" content="{{ meta_description | escape }}" />{% endif %}
+    {% if share_image != "" %}
+    <meta property="og:image" content="{{ share_image }}" />
+    <meta name="twitter:card" content="summary_large_image" />
+    {% else %}
+    <meta name="twitter:card" content="summary" />
+    {% endif %}
+    {% if tk.favicon != "" %}<link rel="icon" href="{{ tk.favicon }}" />{% endif %}
+    {%- assign families = f_heading | append: "|" | append: f_body | split: "|" | uniq -%}
+    {%- unless f_heading contains "System" and f_body contains "System" %}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    {%- endunless -%}
+    {%- for f in families -%}
+      {%- unless f contains "System" -%}
+        {%- capture key %}|{{ f }}|{% endcapture -%}
+        {%- if f == "Instrument Serif" -%}{%- assign spec = ":ital@0;1" -%}
+        {%- elsif serif_fonts contains key -%}{%- assign spec = ":ital,wght@0,400;0,600;1,400" -%}
+        {%- else -%}{%- assign spec = ":wght@400;500;600" -%}{%- endif %}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family={{ f | replace: ' ', '+' }}{{ spec }}&display=swap" />
+      {%- endunless -%}
+    {%- endfor %}
+    <style>
+      {{ theme.css }}
+      :root {
+        {%- assign roles = "heading,body" | split: "," -%}
+        {%- for r in roles -%}
+          {%- if r == "heading" -%}{%- assign f = f_heading -%}{%- else -%}{%- assign f = f_body -%}{%- endif -%}
+          {%- capture key %}|{{ f }}|{% endcapture %}
+        --font-{{ r }}: {% if f == "System serif" %}ui-serif, Georgia, "Times New Roman", serif{% elsif f == "System sans" %}system-ui, -apple-system, "Segoe UI", Roboto, sans-serif{% elsif f == "IBM Plex Mono" %}"IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace{% elsif serif_fonts contains key %}"{{ f }}", Georgia, "Times New Roman", serif{% else %}"{{ f }}", system-ui, -apple-system, "Segoe UI", sans-serif{% endif %};
+        {%- endfor %}
+      }
+      {{ site.css_overrides }}
+    </style>
+  </head>
+  <body{% if is_bio %} class="is-bio"{% endif %}>
+    <a class="skip-link" href="#content">Skip to content</a>
+    <main id="content">
+      {{ content }}
+    </main>
+    {% if tk.show_branding != false %}
+    <footer class="site-footer">
+      <p>Published with <a href="https://masthead.site" rel="noopener">Masthead</a></p>
+    </footer>
+    {% endif %}
+  </body>
+</html>

@@ -1,0 +1,33 @@
+<article class="doc">
+  <p class="crumb"><a href="/">← {{ site.name | escape }}</a></p>
+  <h1 class="doc__title">{{ page.title | escape }}</h1>
+
+  {%- if tags != empty %}
+  <nav class="tags" aria-label="Filter posts by tag">
+    <a href="{{ page.url }}"{% unless current_tag %} aria-current="page"{% endunless %}>All</a>
+    {%- for tag in tags %}
+    <a href="?tag={{ tag.slug }}"{% if tag.active %} aria-current="page"{% endif %}>{{ tag.name | escape }}</a>
+    {%- endfor %}
+  </nav>
+  {%- endif %}
+
+  {%- if posts == empty %}
+  <p class="muted">No posts yet.</p>
+  {%- else %}
+  <ul class="writing__list">
+    {%- for post in posts %}
+    <li>
+      <a class="post-row" href="{{ post.url }}">
+        {%- if post.post_options.featured_image != "" %}
+        <img class="post-row__thumb" src="{{ post.post_options.featured_image }}" alt="" loading="lazy" decoding="async" width="64" height="64" />
+        {%- endif %}
+        <span class="post-row__title">{{ post.title | escape }}</span>
+        {%- if post.published_at %}
+        <time class="post-row__date" datetime="{{ post.published_at | iso8601 }}">{{ post.published_at | strftime: "%b %-d, %Y" }}</time>
+        {%- endif %}
+      </a>
+    </li>
+    {%- endfor %}
+  </ul>
+  {%- endif %}
+</article>

@@ -1,0 +1,71 @@
+{%- comment -%}
+  Shown at / until a Link in Bio page is set as the homepage, and for
+  /search and ?tag=. Built only from site data so it looks finished with
+  zero setup. The link-item markup is a twin of pages/bio.liquid.
+{%- endcomment -%}
+{%- assign words = site.name | split: " " -%}
+{%- capture initials -%}{{ words.first | slice: 0, 1 }}{% if words.size > 1 %}{{ words.last | slice: 0, 1 }}{% endif %}{%- endcapture -%}
+<div class="bio" data-layout="classic-list">
+  <div class="bio__side">
+    <header class="profile">
+      <a class="avatar avatar--initials" href="/" aria-label="{{ site.name | escape }} — home">{{ initials | upcase | escape }}</a>
+      <h1 class="profile__name">{{ site.title | default: site.name | escape }}</h1>
+      {%- if site.description != "" %}
+      <p class="profile__bio">{{ site.description | escape }}</p>
+      {%- endif %}
+    </header>
+  </div>
+
+  <div class="bio__main">
+    {%- if search_query or current_tag %}
+    <p class="crumb"><a href="/">← All</a></p>
+    {%- else %}
+      {%- if pages != empty %}
+    <ul class="links">
+        {%- for p in pages %}
+      <li class="link">
+        <a class="link__a" href="{{ p.url }}">
+          <span class="link__media link__media--placeholder" aria-hidden="true">{{ p.title | slice: 0, 1 | upcase | escape }}</span>
+          <span class="link__body"><span class="link__title">{{ p.title | escape }}</span></span>
+          <span class="link__arrow" aria-hidden="true">→</span>
+        </a>
+      </li>
+        {%- endfor %}
+    </ul>
+      {%- endif %}
+    {%- endif %}
+
+    {%- if posts != empty or search_query %}
+    <section class="writing" aria-labelledby="writing-title">
+      <h2 id="writing-title" class="section-title">
+        {%- if search_query -%}
+          {{ search_count }} result{% unless search_count == 1 %}s{% endunless %} for “{{ search_query | escape }}”
+        {%- elsif current_tag -%}
+          Tagged “{{ current_tag.name | escape }}”
+        {%- else -%}
+          Writing
+        {%- endif -%}
+      </h2>
+      {%- if posts == empty %}
+      <p class="muted">Nothing matches that search.</p>
+      {%- else %}
+      <ul class="writing__list">
+        {%- for post in posts %}
+        <li>
+          <a class="post-row" href="{{ post.url }}">
+            {%- if post.post_options.featured_image != "" %}
+            <img class="post-row__thumb" src="{{ post.post_options.featured_image }}" alt="" loading="lazy" decoding="async" width="64" height="64" />
+            {%- endif %}
+            <span class="post-row__title">{{ post.title | escape }}</span>
+            {%- if post.published_at %}
+            <time class="post-row__date" datetime="{{ post.published_at | iso8601 }}">{{ post.published_at | strftime: "%b %-d, %Y" }}</time>
+            {%- endif %}
+          </a>
+        </li>
+        {%- endfor %}
+      </ul>
+      {%- endif %}
+    </section>
+    {%- endif %}
+  </div>
+</div>
